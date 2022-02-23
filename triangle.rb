@@ -14,7 +14,10 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  sides = [a, b, c]
+  sides.each { |s| fail TriangleError if s <= 0 || sides.sum <= 2 * s }
+  length = sides.uniq.length
+  [:equilateral, :isosceles, :scalene][length - 1]
 end
 
 # Error class used in part 2.  No need to change this code.

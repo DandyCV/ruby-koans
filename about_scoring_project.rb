@@ -31,6 +31,19 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  points = { 1 => 100, 5 => 50 }
+  bonus_points = { 1 => 1000 }
+  sum = 0
+  # Collect general point
+  dice.each do |item|
+    sum += points.fetch(item, 0) if dice.count(item) < 3
+  end
+  # Collect tripple bonus points
+  dice.uniq.each do |item|
+    sum += item * bonus_points.fetch(item, 100) + points.fetch(item, 0) * (dice.count(item) - 3) if dice.count(item) > 2
+  end
+
+  sum
 end
 
 class AboutScoringProject < Neo::Koan
